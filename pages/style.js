@@ -16,9 +16,20 @@ const Card = styled.div`
     position: relative;
     width: auto;
     height: 100%;
+    transform: translate(0, 0);
+    transition: transform 0.5s;
+    &:hover {
+      cursor: pointer;
+      transform: translate(0, -1.2rem);
+      transition: transform 0.5s;
+    }
+    &:hover ~ h2 {
+      color: #ed1d24;
+    }
   }
   h2 {
     position: relative;
+    text-align: center;
   }
 `;
 
