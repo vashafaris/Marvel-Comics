@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Create Next App</title>
+        <title>Marvel Comics</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Layout>
