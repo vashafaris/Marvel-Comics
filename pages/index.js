@@ -26,7 +26,7 @@ export default function Home() {
     <>
       <Head>
         <title>Marvel Comics</title>
-        <link rel='icon' href='/favicon.ico' />
+        <link rel='icon' href='/marvelico.png' />
       </Head>
       <Layout>
         <Row>
