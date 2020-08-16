@@ -11,11 +11,19 @@ const Container = styled.div`
   z-index: -2;
 `;
 
+const Header = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    margin-left: 1rem;
+    font-size: 5rem;
+  }
+`;
+
 const Logo = styled.img`
   width: auto;
   height: 7rem;
-  margin: 0 0 3.2rem;
-
   @media only screen and (max-width: 768px) {
     height: 72px;
   }
@@ -31,4 +39,4 @@ const BackgroundImage = styled.img`
   filter: opacity(0.5);
 `;
 
-export { Container, Logo, BackgroundImage };
+export { Container, Header, Logo, BackgroundImage };

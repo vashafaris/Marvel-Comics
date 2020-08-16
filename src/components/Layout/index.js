@@ -1,11 +1,14 @@
 import React from 'react';
-import { Container, Logo, BackgroundImage } from './style';
+import { Container, Logo, BackgroundImage, Header } from './style';
 
 const Layout = ({ children }) => {
   return (
     <>
       <Container>
-        <Logo src='/assets/MarvelLogo.png' />
+        <Header>
+          <Logo src='/assets/MarvelLogo.png' />
+          <h1>COMICS</h1>
+        </Header>
         <BackgroundImage src='assets/bimg.png' />
         {children}
       </Container>
