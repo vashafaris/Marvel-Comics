@@ -1,17 +1,32 @@
+import { useMemo } from 'react';
+import Link from 'next/link';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 
-import Layout from '../src/components/Layout';
-import GlobalStyle from '../src/styles/GlobalStyle';
-import { Card } from './style';
+import { useComicContext } from '../src/contexts/ComicContext';
+import Layout from '../src/components/Layout/Home';
+import { Card } from './styles';
 import { Row, Column } from '../src/components/grid';
-import { useEffect } from 'react';
+import { SET_DATA } from '../src/utils/constant';
 
 export default function Home() {
-  const { isLoading, error, data } = useQuery('repoData', () =>
+  const {
+    state: { listComic },
+    dispatch,
+  } = useComicContext();
+
+  const { isLoading, error, data } = useQuery('marvelData', () =>
     fetch(
       'https://gateway.marvel.com:443/v1/public/comics?format=comic&formatType=comic&orderBy=focDate&limit=12&ts=1&apikey=e9f5bc4e40105a92cb4a5492caf62bac&hash=ee88c92513ded6080fd992459355b19b'
-    ).then((res) => res.json())
+    ).then(async (res) => {
+      const jsonRes = await res.json();
+      dispatch({
+        type: SET_DATA,
+        payload: jsonRes.data.results,
+      });
+      return jsonRes;
+    })
   );
 
   if (isLoading) {
@@ -19,34 +34,33 @@ export default function Home() {
   } else if (error) {
     console.log('error', error);
   } else {
-    console.log('data', data);
+    console.log('data', data.data.results);
   }
 
   return (
     <>
-      <Head>
-        <title>Marvel Comics</title>
-        <link rel='icon' href='/marvelico.png' />
-      </Head>
       <Layout>
         <Row>
           {!isLoading &&
+            !error &&
             data.data.results.map((item) => {
+              console.log('item', item);
               return (
                 <Column lg={4} key={item.id}>
                   <Card>
-                    {item.images.length > 0 ? (
-                      <img
-                        src={
-                          item.images[0].path +
-                          '/portrait_incredible.' +
-                          item.images[0].extension
-                        }
-                      />
-                    ) : (
-                      <img src='/assets/imgnf.png' />
-                    )}
-
+                    <Link href='/comic/[id]' as={`/comic/${item.id}`}>
+                      {item.images.length > 0 ? (
+                        <img
+                          src={
+                            item.images[0].path +
+                            '/portrait_incredible.' +
+                            item.images[0].extension
+                          }
+                        />
+                      ) : (
+                        <img src='/assets/imgnf.png' />
+                      )}
+                    </Link>
                     <h2>{item.title}</h2>
                   </Card>
                 </Column>
