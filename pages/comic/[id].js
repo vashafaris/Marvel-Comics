@@ -10,26 +10,11 @@ export default function Comic() {
   const router = useRouter();
   const { id } = router.query;
 
-  // const { isLoading, error, data } = useQuery('marvelData', () =>
-  //   fetch(
-  //     `https://gateway.marvel.com:443/v1/public/comics/${id}?ts=1&apikey=e9f5bc4e40105a92cb4a5492caf62bac&hash=ee88c92513ded6080fd992459355b19b`
-  //   ).then((res) => res.json())
-  // );
-
-  // if (isLoading) {
-  //   console.log('loading...');
-  // } else if (error) {
-  //   console.log('error', error);
-  // } else {
-  //   console.log('data', data.data.results);
-  // }
-
   const {
     state: { listComic },
   } = useComicContext();
 
   const comic = listComic.find((item) => item.id == id);
-  console.log(comic);
 
   return (
     <>
@@ -50,7 +35,7 @@ export default function Comic() {
             src={
               comic.images[0]
                 ? comic.images[0].path + '.' + comic.images[0].extension
-                : null
+                : '/assets/imgna.png'
             }
           />
           <div className='column'>

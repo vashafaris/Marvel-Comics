@@ -58,7 +58,7 @@ export default function Home() {
                           }
                         />
                       ) : (
-                        <img src='/assets/imgnf.png' />
+                        <img src='/assets/imgna.png' />
                       )}
                     </Link>
                     <h2>{item.title}</h2>
