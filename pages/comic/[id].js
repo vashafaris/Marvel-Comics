@@ -1,6 +1,7 @@
-import Head from 'next/head';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
+import ErrorPage from 'next/error';
 
 import Layout from '../../src/components/Layout/Comic';
 import { useComicContext } from '../../src/contexts/ComicContext';
@@ -83,14 +84,28 @@ export default function Comic() {
     state: { listComic },
   } = useComicContext();
 
-  const comic = listComic.find((item) => item.id == id);
+  const [comic, setComic] = useState({
+    title: '',
+    images: [],
+    characters: {
+      items: [],
+    },
+    description: '',
+    creators: {
+      items: [],
+    },
+  });
+
+  useEffect(() => {
+    setComic(listComic.find((item) => item.id == id));
+  }, []);
+
+  if (!comic) {
+    return <ErrorPage statusCode={404} />;
+  }
 
   return (
     <>
-      <Head>
-        <title>Marvel Comics</title>
-        <link rel='icon' href='/marvelico.png' />
-      </Head>
       <Layout>
         <Container>
           <BackgroundImage
