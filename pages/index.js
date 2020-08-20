@@ -7,7 +7,7 @@ import ErrorPage from 'next/error';
 import { useComicContext } from '../src/contexts/ComicContext';
 import Layout from '../src/components/Layout/Home';
 import { Card } from './styles';
-import { Row, Column } from '../src/components/grid';
+import { Row, Column } from '../src/components/Grid';
 import { SET_DATA } from '../src/utils/constant';
 
 export default function Home({ data }) {
